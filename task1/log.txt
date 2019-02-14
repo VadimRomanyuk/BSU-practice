@@ -1,0 +1,11 @@
+commit a87d091405a66e22d5e2b6e94941c99f9e8cc80f
+Author: VadimRomanyuk <fpm.romanyukVN@bsu.by>
+Date:   Thu Feb 14 17:46:17 2019 +0300
+
+    add status.txt
+
+commit 3688ef65c860aea87e9010ad3ca7905b32c2ca1c
+Author: VadimRomanyuk <fpm.romanyukVN@bsu.by>
+Date:   Thu Feb 14 17:44:38 2019 +0300
+
+    add .gitignore
