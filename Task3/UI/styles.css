@@ -1,0 +1,198 @@
+body{
+    background-color: #b38df7;
+}
+header{
+  background:  white;
+  height: 40%  ;
+  width: auto;
+}
+
+#footer
+{   position: fixed;
+    left: 0; bottom: 0;
+    font-size : 65%;
+    padding: 7px;
+    background: white;
+    color: black;
+    width: 100%;
+    margin-top: 10%;
+}
+
+p.header {
+    position: relative;
+        width: 140px;
+        height: 70px;
+        text-align: center;
+        color: white;
+        font-family: cursive;
+        font-size: 140%;
+        line-height: 70px;
+        background-color: #1464f6;
+        border: 5.6px solid white;
+        -webkit-border-radius: 21px;
+        -moz-border-radius: 21px;
+        border-radius: 21px;
+        -webkit-box-shadow: 1.4px 1.4px 2.8px white;
+        -moz-box-shadow: 1.4px 1.4px 2.8px white;
+        box-shadow: 1.4px 1.4px 2.8px white;
+}
+
+section{
+  background: #fafafa;
+  position: fixed;
+ right:20%;
+}
+
+a.buttonedit {
+  font-family:  cursive;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 -1px rgba(0,0,0,.5);
+    user-select: none;
+    font-size:100%;
+    line-height: 30px;
+    padding: .7em 1.5em;
+    border: 1px solid #1464f6;
+    border-radius: 5px;
+    outline: none;
+    background: #1464f6 linear-gradient(#1464f6, #1464f6 80%);
+    box-shadow:
+     0 6px #1464f6,
+     0 3px 15px rgba(0,0,0,.4),
+     inset 0 1px rgba(255,255,255,.3),
+     inset 0 0 3px rgba(255,255,255,.5);
+    transition: .2s;
+  } 
+  .buttonedit:hover {
+      color:#1464f6;
+    background: rgb(167,91,41) linear-gradient(white, white 80%);
+  }
+  .buttonedit:active {
+    background: #1464f6 linear-gradient(#1464f6 20%, #1464f6 );
+    color:white;
+    box-shadow:
+     0 2px #1464f6,
+     0 1px 6px rgba(0,0,0,.4),
+     inset 0 1px rgba(255,255,255,.3),
+     inset 0 0 3px rgba(255,255,255,.5);
+    -webkit-transform: translate(0, 4px);
+    transform: translate(0, 4px);
+  }
+  .search{
+    position:fixed;
+    width: 100%;
+    height: 200%;
+    float: left;
+    margin-top: 10%;
+  }
+  .photofilters{
+    font-size: 150%;
+    font-family: Aladin sans-serif;
+    color:white;
+    margin: 50px 80px 20px 50px ;
+}
+.phototools li{
+  position:relative;
+  margin-top:1%;
+  margin-left: 1%;
+  list-style-type: none;
+}
+.hashtegs
+{
+    font-family: cursive;
+    color: blue;
+    font-size: 150%;
+    margin-top: 52%;
+    margin-right: auto;
+    margin-left: 1%;
+    margin-bottom: 40px;
+    float: left;
+}
+
+.headPost
+{
+    height: 50px;
+    margin-bottom: 7px;
+}
+.photo
+{
+  position: absolute;  width: 40%;height: 40%; left: 13%;
+    margin: 0 auto;
+}
+.elements {
+    height: 60px;
+    margin-bottom: 10px;
+}
+.comment
+{
+    width: 790px;
+    font-size: 25px;
+    margin: 0 auto;
+}
+.userphoto
+{
+    margin-top:3px;
+    margin-left: 1%;
+    margin-right: 3px;
+    float: left;
+    position: absolute;  width: 9%;height: 9%; left: 0%
+}
+.username
+{
+    font-family: cursive;
+    margin-top:7px;
+    float: left;
+    font-size: 150%;
+    margin-left: 3%;
+    position: absolute; left: 8%;
+}
+.datapost
+{
+    font-family: cursive;
+    margin-top:12px;
+    font-size: 25px;
+    float: right;
+    margin-right: 7% ;
+}
+.fone
+{
+    margin-top: 5px;
+    margin-left: 2%;
+    float: left;
+    height: 900%;
+    width: 40%;
+}
+.like
+{
+    margin-top: 29%;
+    margin-left: 2%;
+    float: left;
+    position: absolute; height: 4%; width: 4%; left: 7%;
+}
+.setting
+{
+    margin-top: 29%;
+    margin-left: 6%;
+    float: left;
+    position: absolute;  width: 5%;height: 5%; left: 43%;
+}
+.delete
+{
+    float: right;
+    margin-top: 3%;
+    margin-right: 3%;
+    position: absolute;  width: 5%;height: 8%;left: 55%;
+}
+.post{
+    background: white;
+    margin-top: 13%;
+    width: 70%;
+    height: 100%;
+    left:40%;
+    margin-bottom: 190px;
+    border:1px solid black;
+}
