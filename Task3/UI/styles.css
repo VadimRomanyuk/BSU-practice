@@ -1,0 +1,213 @@
+.body {
+    font-family: cursive;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+     padding :0;
+     background-color: white;
+}
+.footer{
+    margin-top: 40px;
+    position: fixed;
+    left: 0; bottom: 0;
+    width: 100%;
+    background: #b38df7;
+    color: white;
+    text-align: center;
+    padding : 18px;
+}
+.footer p{
+   display: inline;
+}
+.header{
+    position: sticky;
+    width: 100%;
+    top:0%;
+    background: #b38df7;
+    color: white;
+    min-height: 60px;
+    padding-top:30px;
+    border-bottom: cyan 3px double; 
+}
+.header li{
+    padding: 0px 20px 0px 20px;
+    float: left;
+    display: inline;
+}
+.header a
+{   background: #b38df7;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
+.container{
+    width: 80%;
+   margin: auto;
+   overflow: hidden;
+}
+ul{
+    margin:0;
+    padding: 0;
+}
+.logotype{
+float: right;
+}
+.logotype h1{
+margin: 0;
+font-size: 35px;
+}
+.header nav{
+float: right;
+margin-top: 15px; 
+}
+.header .allocate{
+    font-weight: normal;
+    color: white;
+}
+.add-button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 38px;
+    background: #1464f6;
+    border: 0;
+    color: azure;
+    width: 20%;
+    cursor: pointer;
+    font-family: cursive;
+    outline: none;
+}
+.toolbar {
+    float: right;
+    width: 30%;
+    margin-top: 35px;
+}
+.toolbar .filter input {
+    width: 90%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+.toolbar label {
+    font-family: cursive;
+    font-weight: bold;
+}
+.search-button {
+    outline: none;
+    margin-top: 20px;
+    height: 28px;
+    background: #1464f6;
+    border: 0;
+    color: white;
+    width: 40%;
+    font-family: cursive;
+    cursor: pointer;
+}
+.post {
+    margin-top: 40px;
+    float: left;
+    width: 65%;
+}
+article img{
+    width: 80%;
+    border: white solid 1px;
+}
+.postphoto li{
+  padding: 20px 0px 20px 20px;
+  border-left: white solid 1px;
+  border-right: white solid 3px;
+  border-bottom: white solid 1px;
+ margin-bottom: 40px;
+ background: white;
+}
+.postphoto p{
+    background: white;
+    padding: 5px;
+    max-width: 100%;
+    border-bottom-style: dotted;
+    border-top-style: dotted;
+}
+.postphoto h3{
+font-style: normal;
+font-weight: normal;
+font-family: cursive;
+padding: 0px 0px 0px 5px;
+display: inline;
+max-width: 100%;
+}
+.postphoto button{
+    text-align-last: center;
+    display: inline;
+}
+.delch-button
+{
+    height: 30px;
+    font-family: cursive;
+    background:  #1464f6;
+    color: azure;
+    font-size: 14px;
+    text-align: center;
+}
+.delch-button:hover{
+    background:  white;
+    color: #1464f6;
+}
+.like-button{
+    height: 30px;
+    font-family: cursive;
+    background:  white;
+    color: red;
+    font-size: 14px;
+    text-align: center;
+}
+.like-button:hover{
+    background:  red;
+    color: white;
+}
+article .loadpost {
+    text-align: center;
+    margin-top: 20px;
+}
+.loadpost-button {
+    font-size: 16px;
+    font-weight: lighter;
+    font-family: cursive;
+    outline: none;
+    margin-bottom: 80px;
+    height: 38px;
+    background: #1464f6;
+    color: azure;
+    width: 40%;
+    cursor: pointer;
+    border: none;
+}
+@media (max-width: 760px)
+{
+    .logotype,
+    .header nav,
+    .header nav li,
+    .toolbar,
+    .post {
+        float: none;
+        width: 80%;
+    }
+    .header {
+        padding-bottom: 25px;
+    }
+    .postphoto p {
+        text-align: left;
+        font-size: 14px;
+    }
+    .postphoto button {
+        display: inline;
+        margin: 0;
+        font-size: 12px;
+        height: 25px;
+        width: fit-content;
+        -webkit-transition: 0.2s ease;
+        transition: 0.2s ease;
+    }
+    .add-button{
+       position: absolute; right: 0%; top: 60%;
+    }
+}
