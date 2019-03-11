@@ -1,4 +1,5 @@
 /*uncomment for the test*/
+
 /*var I =*/;(function(){
 var photoPosts = [
     {id: '1',
