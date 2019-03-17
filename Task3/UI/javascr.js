@@ -1048,7 +1048,7 @@
  
  //console.log(I.getPage(0,10,{dateFrom:new Date("1996-02-16"), dateTo: new Date("2012-05-24"), hashtag: "#color"}))
  
- console.log(I.addAll([{
+ /*console.log(I.addAll([{
   id: '23',
 
   description: 'Водохранилище',
@@ -1079,4 +1079,4 @@
  hashTags : ["#hard","#work"]
 
 },]
- ))
+ ));*/
