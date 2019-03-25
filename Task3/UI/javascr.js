@@ -961,7 +961,8 @@
     { if(this.edit(post.id, post)){return true;}
       if(PostCollection.validate(post)){
         console.log("Post has been added to collection")
-        this._photoPosts.push(post);
+        this._photoPosts.push(post)
+        this._photoPosts = this._photoPosts.sort(this._compareByDate);
       return true; }
       return false;
     }
@@ -980,7 +981,14 @@
      return false;
    }
 
-   _compareByDate(a,b){return a.createdAt - b.createdAt;}
+   getPostPosition(post)
+   {
+    return this._photoPosts.findIndex(elem => elem.id == post.id);
+   }
+
+   getPostsCount() {return this._photoPosts.length;}
+
+   _compareByDate(a,b){return b.createdAt - a.createdAt;}
    
    getPage(skip,top,filterConfig)
    {
@@ -1012,9 +1020,10 @@
        }
      }
      let filteredPosts = this._photoPosts;
+     if(!!filterConfig){
      Object.keys(filterConfig).forEach(function(field){
        filteredPosts = filterHelper[field](filteredPosts,filterConfig[field])
-     });
+     });}
      return filteredPosts.slice(skip, skip +top).sort(this._compareByDate);
    }
 
