@@ -51,6 +51,8 @@ let pager = (function(){
      }
     }
 }());
+//                  Tests 
+
 //pager.setPageUser("Petrov");
 /*pager.setPosts( [
     {id: '1',
@@ -100,7 +102,6 @@ let pager = (function(){
     hashTags : ["#color"]
 
    }]);*/
-//                  Tests 
 //pager.removePost(1);
 //pager.addPost({id: "13",author:"Programmer",description:"Great Day",createdAt:new Date('2005-02-03T23:00:00'),photoLink:"img/Picture.jpg",hashTags:["#COLOR","#RED"],likes:["Petrov"]});
 //pager.editPost({id: "1",author:"Ivanov",description:"RONNEY GOAL",createdAt:new Date('2005-02-20T23:00:00'),photoLink:"img/Ronney.jpg",hashTags:["#sunny"],likes:["Petrov","Sidorov"]});
