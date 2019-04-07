@@ -1,11 +1,11 @@
 let pager = (function(){
     return {
         setPageUser: function (user)
-        {
+        {   
             pageView = new View(user);
         },
         setPosts: function (posts)
-        {
+        {  countPostsForLoad = 0;
             pagePosts = new PostCollection(posts);
             this.createPage();
         },
@@ -36,6 +36,7 @@ let pager = (function(){
          if(post = pagePosts.get(id))
          {
              pageView.removePost(post);
+             pagePosts.remove(id);
              return true;
          }
          return false;
@@ -48,6 +49,63 @@ let pager = (function(){
             return true;
         }
         return false;
+     },
+     getALLPosts()
+     {
+        return  pagePosts.getArrPosts();
+     },
+     loadMorePosts()
+     {
+          countPostsForLoad += 10;
+          pagePosts.getPage(countPostsForLoad,10).forEach(element=>{
+              pageView.showPost(element);
+          });
+     },
+     savePosts(user)
+     {
+      pagePosts.save(user);
+     },
+     restorePosts(user)
+     {
+     return  PostCollection.restore(user);
+     },
+     clearPage()
+     {
+         View.clear();
+     },
+     createFilteredPosts: function(filterConfig)
+     { let posts =  pagePosts.getPage(0,10,filterConfig);
+        if(posts.length > 0)
+        {
+          posts.forEach(element=>{
+            pageView.showPost(element);
+          }) 
+          return true; 
+        }
+        /*pagePosts.getPage(0,10,filterConfig).forEach(element => {
+            pageView.showPost(element);
+        });*/
+        return false;
+     },
+     pushLiker(id,liker)
+     {
+        pagePosts.addPhotoLiker(id,liker);
+     },
+     deleteLiker(id,liker)
+     {
+        pagePosts.deletePhotoLiker(id,liker);
+     },
+     isUserLikes(id,user)
+     {
+      return pagePosts.isUserLikesPost(id,user);
+     },
+     getPost(id)
+     {
+         return pagePosts.get(id);
+     },
+     createSingle(post) // from this
+     {
+         pageView.showPost(post);
      }
     }
 }());
