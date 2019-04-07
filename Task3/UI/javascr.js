@@ -849,10 +849,16 @@
     { 
       this._photoPosts = new Array();
       postArray.forEach(elem => {if(PostCollection.validate(elem)){this._photoPosts.push(elem);}});
+      this.sortPosts();
     }
 
     static  _mainFields = ["author","createdAt","id","photoLink","likes","hashTags","description"];
-  
+   
+      sortPosts()
+     {
+      this._photoPosts.sort(this._compareByDate);
+     }
+
    static _checkId(id)
     {
       if(!id || (/[^0-9]/.test(id))){return false;}
@@ -975,6 +981,7 @@
        console.log("Post has been updated");
         this._photoPosts[position].description = post.description;
         this._photoPosts[position].photoLink = post.photoLink;
+        this._photoPosts[position].hashTags = post.hashTags;
         console.log(this._photoPosts[position]);
         return true;
      }
@@ -1035,6 +1042,53 @@
         else invalidPosts.push(elem);});
         console.log("Invalid posts");
         return invalidPosts;
+   }
+   getArrPosts()
+   {
+     return this._photoPosts;
+   }
+   getArrLength()
+   {
+     return this._photoPosts.length;
+   }
+    save(user)
+   {
+      let strPosts = "[";
+      this._photoPosts.forEach(element => {
+         strPosts += JSON.stringify(element) + ',';
+      });
+      strPosts += "]";
+      strPosts = strPosts.replace(",]","]");
+      localStorage.setItem(user + "posts",strPosts);
+   }
+   static restore(user)
+   {
+      let posts = localStorage.getItem(user + "posts");
+      return JSON.parse(posts,function(key,value)
+      {
+         if(key == 'createdAt'){return new Date(value);}
+         return value;
+      });
+   }
+   addPhotoLiker(id, liker)
+   {    
+      let index = this._photoPosts.findIndex(elem => elem.id == id);
+       this._photoPosts[index].likes.push(liker);
+   }
+   deletePhotoLiker(id, liker)
+   {
+    let index = this._photoPosts.findIndex(elem => elem.id == id);
+    let likerPosition = this._photoPosts[index].likes.indexOf(liker);
+    this._photoPosts[index].likes.splice(likerPosition,1);
+   }
+   isUserLikesPost(id,user)
+   { if(!!!id || !!!user){console.log("no user or id");return false;}
+     let post = this.get(id);
+     if(!post){console.log("no post");return false;}
+     let index = post.likes.findIndex(elem => elem == user);
+     if(index > -1) { console.log("ok");return true;}
+     console.log("bad user");
+     return false;
    }
   }
 
