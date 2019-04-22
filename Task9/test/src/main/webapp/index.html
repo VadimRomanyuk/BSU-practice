@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+    <title>PhotoLover</title>
+</head>
+<body class="body" id="body">
+<header class="header">
+    <div class="container">
+        <div class="logotype">
+
+            <h1><span class="allocate">Photo</span>Lover</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a id="username">Username</a></li>
+                <li class="line"><a id="exit" style="display:none">Exit</a></li>
+            </ul>
+        </nav>
+        <button class="add-button" id = "add-but" type="submit" style="display: none">Add Post</button>
+    </div>
+</header>
+<section class="main">
+    <div class="container" id="main"  style="display:none">
+        <aside class="toolbar" id="searchertools">
+            <form class="filter">
+                <div>
+                    <label>Author's name</label><br>
+                    <input type="text" placeholder="Nickname..." id="aut-search">
+                </div>
+                <div>
+                    <label><br>Date</label><br>
+                    <input type="date" id="datefrom" auto><br>
+                    <input type="date" id="dateto">
+                </div>
+                <div>
+                    <label><br>Hashtag</label><br>
+                    <input type="text" id="tag" placeholder="#PhotoLover">
+                </div>
+                <button type="submit" id="searcher" class="search-button">Apply</button>
+            </form>
+        </aside>
+        <aside class="toolbar" id="createpost" style="display:none">
+            <form class="filter">
+                <div>
+                    <label>Photolink</label>
+                    <input type="text" placeholder="Photolink..." id="link">
+                </div>
+                <div>
+                    <label>Description</label>
+                    <input type="text" placeholder="Description..." id="description">
+                </div>
+                <div>
+                    <label>Hashtag</label>
+                    <input type="text" id="oldtags" placeholder="#PhotoLover">
+                </div>
+                <button type="submit" id="back" class="search-button">back</button>
+                <button type="submit" id="savepost" class="search-button">save post</button>
+            </form>
+        </aside>
+        <article class="post">
+            <ul class="postphoto" id = "lenta">
+
+            </ul>
+            <div class="loadpost">
+                <form>
+                    <button id="load-but" class="loadpost-button">load posts</button>
+                </form>
+            </div>
+        </article>
+
+    </div>
+    <div  id="autorize" style="display:none" class="container">
+        <aside class="toolbar">
+            <form class="filter" id="form-autorize">
+                <div>
+                    <label>Enter your Nickname</label><br>
+                    <input type="text" id="login" placeholder="Nickname..."  required>
+                </div>
+                <div>
+                    <label><br>Enter your password</label><br>
+                    <input type="password" id="pass" placeholder="Password..." required >
+                </div>
+                <button type="submit" class="search-button" id="confirm-but">Confirm</button>
+            </form>
+        </aside>
+    </div>
+
+
+</section>
+<footer class="footer">
+    <p>Copyright by Vadim Romanyuk, 2 course, 5 group, 2019</p>
+    <p>&#9993; romanyuk-vad@mail.ru </p>
+    <p>PhotoLover.com</p>
+</footer>
+
+</body>
+<script src = "javascr.js">
+</script>
+<script src = "View.js">
+</script>
+<script src = "GlobalFunc.js">
+</script>
+<script src = "PageController.js">
+</script>
+</html>
