@@ -1,5 +1,7 @@
 package project.logic.com;
 
+import com.google.gson.Gson;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -308,6 +310,15 @@ public boolean setLike(String id, String user)
     return true;
 }
 
+public int getPostIndex(String id)
+{
+    for(int i = 0 ; i < postArray.size();i++)
+    {
+        if(postArray.get(i).getId().equals(id)){return i;}
+    }
+    return -1;
+}
+
 public ArrayList<PhotoPost> addAll(ArrayList<PhotoPost> posts)
 {
     ArrayList<PhotoPost> invalidPosts = new ArrayList<>();
@@ -325,5 +336,17 @@ public ArrayList<PhotoPost> addAll(ArrayList<PhotoPost> posts)
     return invalidPosts;
 }
 
-
+ public static String toJsonString(List<PhotoPost> info)
+ {   if(info.size()>0) {
+     Gson gson = new Gson();
+     StringBuilder sb = new StringBuilder();
+     sb.append("[");
+     for (int i = 0; i < info.size(); i++) {
+         sb.append(gson.toJson(info.get(i))).append(",");
+     }
+     sb.append("]");
+     return sb.toString().replace(",]", "]");
+ }
+ return "";
+ }
 }
