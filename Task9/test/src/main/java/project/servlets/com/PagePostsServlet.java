@@ -1,8 +1,10 @@
 package project.servlets.com;
 
 import project.logic.com.PhotoPost;
+import project.logic.com.PostCollection;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,12 @@ public class PagePostsServlet extends HttpServlet {
         int skip, top;
         try {
             skip = Integer.parseInt(req.getParameter("skip").trim());
+            if(skip == -1)
+            {
+                posts = PostServlet.getStorage().getArray();
+                resp.getOutputStream().print(PostCollection.toJsonString(posts));
+                return ;
+            }
         } catch (Exception e)
         {
             skip = 0;
@@ -64,9 +72,6 @@ public class PagePostsServlet extends HttpServlet {
         else{
             posts = PostServlet.getStorage().getPage(skip,top,filterConfig);
         }
-         for(PhotoPost elem : posts)
-         {
-             resp.getOutputStream().println(elem.toString());
-         }
+         resp.getOutputStream().print(PostCollection.toJsonString(posts));
     }
 }
