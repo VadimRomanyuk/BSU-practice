@@ -22,7 +22,7 @@ class View
     {   let likeClass = "like-button";
     let likeValue = "&#10084 Like";
         let newPost = `<h3>${post.author}</h3>
-        <h3 class= "date"> &nbsp &nbsp  ${post.createdAt.getDate()}.${post.createdAt.getMonth()+1}.
+        <h3 class= "date"> &nbsp &nbsp &nbsp  ${post.createdAt.getDate()}.${post.createdAt.getMonth()+1}.
         ${post.createdAt.getFullYear()}</h3>
         <img src=${post.photoLink}><br>`;
         if(post.author === this._user)
