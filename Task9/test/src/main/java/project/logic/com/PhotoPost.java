@@ -9,19 +9,19 @@ import java.util.Date;
 public class PhotoPost {
     private String id;
     private String author;
-    private String photolink;
+    private String photoLink;
     private String description;
     private Date createdAt;
     private ArrayList<String> likes;
-    private ArrayList<String> hashtags;
+    private ArrayList<String> hashTags;
     public PhotoPost(String id, String description, String author,String link,Date date, ArrayList<String> likes,ArrayList<String> tags)
     {
       this.id = id;
       this.author = author;
       this.createdAt = date;
-      this.hashtags = tags;
+      this.hashTags = tags;
       this.likes = likes;
-      this.photolink = link;
+      this.photoLink = link;
       this.description = description;
     }
 
@@ -42,11 +42,11 @@ public class PhotoPost {
     }
 
     public String getPhotolink() {
-        return photolink;
+        return photoLink;
     }
 
     public void setPhotolink(String photolink) {
-        this.photolink = photolink.trim();
+        this.photoLink = photolink.trim();
     }
 
     public String getAuthor() {
@@ -78,12 +78,16 @@ public class PhotoPost {
     }
 
     public ArrayList<String> getHashtags() {
-        return hashtags;
+        return hashTags;
     }
 
     public void setHashtags(ArrayList<String> hashtags) {
-        this.hashtags = hashtags;
+        this.hashTags = hashtags;
     }
+
+    public void putLiker(String user) {this.hashTags.add(user.trim().toLowerCase());}
+
+    public void delLiker(String user){this.hashTags.remove(user.trim().toLowerCase());}
 
     @Override
     public String toString() {
@@ -91,9 +95,9 @@ public class PhotoPost {
         elem.put("id",id);
         elem.put("author",author);
         elem.put("createdAt", createdAt.toString());
-        elem.put("photolink",photolink);
+        elem.put("photolink",photoLink);
         elem.put("description",description);
-        elem.put("hashtags",hashtags.toString());
+        elem.put("hashtags",hashTags.toString());
         return elem.toString();
     }
 }
