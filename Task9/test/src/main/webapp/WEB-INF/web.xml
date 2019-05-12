@@ -4,6 +4,10 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+
   <servlet>
     <servlet-name>JavaWebApp</servlet-name>
     <servlet-class>com.bsu.project.JavaWebApp</servlet-class>
@@ -41,10 +45,19 @@
   <servlet-name>PagePosts</servlet-name>
   <servlet-class>project.servlets.com.PagePostsServlet</servlet-class>
 </servlet>
+  <servlet>
+    <servlet-name>LogUserServlet</servlet-name>
+    <servlet-class>project.servlets.com.LogInServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>LikeServlet</servlet-name>
+    <servlet-class>project.servlets.com.LikeServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>JavaWebApp</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/pht</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
@@ -81,6 +94,11 @@
     <filter-name>JavaFilt</filter-name>
     <filter-class>com.bsu.project.JavaFilter</filter-class>
   </filter>
+
+  <servlet-mapping>
+    <servlet-name>LogUserServlet</servlet-name>
+    <url-pattern>/logpage</url-pattern>
+  </servlet-mapping>
   
   <servlet-mapping>
     <servlet-name>PostWeb</servlet-name>
@@ -91,10 +109,17 @@
     <servlet-name>PagePosts</servlet-name>
     <url-pattern>/photo-posts</url-pattern>
   </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>LikeServlet</servlet-name>
+    <url-pattern>/like</url-pattern>
+  </servlet-mapping>
 
   <filter-mapping>
     <filter-name>JavaFilt</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+  
+  
 </web-app>
