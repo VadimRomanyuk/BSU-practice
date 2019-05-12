@@ -40,39 +40,48 @@ class PageController
        PageController.confirm_but_handle = document.getElementById("confirm-but");
        PageController.confirm_but_handle.addEventListener('click',PageController.createMainPage);
    }
-   static createMainPage(event)
+   static  createMainPage(event)
    {
      event.preventDefault();
-     if(!!PageController.login_input.value.trim() && !!PageController.pass_input.value.trim())
-     {    PageController.getClearPage();
-      PageController.closeAutorizePage();
-      document.getElementById("searchertools").style.display = "block";
-        PageController.user = PageController.login_input.value.trim();
-        let userOnPage = document.getElementById("username");
-        userOnPage.style.display = "block";
-        pager.setPageUser(PageController.user);
-        PageController.rememberUser();
-        PageController.createLoadBut();
-        PageController.exit_but_handle.style.display = "block";
-        PageController.add_but_handle.style.display = "block";
-        document.getElementById("load-but").style.display = "block";
-        document.getElementById("main").style.display = "block";
-        document.getElementById("add-but").addEventListener('click',PageController.makePost);
-         if(PageController.isOnStorage())
-         {  console.log("OK");
-            let posts = pager.restorePosts(PageController.user);
-            PageController.usersPosts = new PostCollection(posts);
-            pager.setPosts(posts);
-         }
-         else{
-            pager.setPosts(photoPosts);
-         }
-         pager.savePosts(PageController.user);
-         PageController.createContFunc();
+     if(!!PageController.login_input.value.trim() && !!PageController.pass_input.value.trim()) {
+         PageController.getClearPage();
+         PageController.closeAutorizePage();
+         document.getElementById("searchertools").style.display = "block";
+         PageController.user = PageController.login_input.value.trim();
+         let userOnPage = document.getElementById("username");
+         Sender.sendUserandPass(PageController.user, document.getElementById("pass").value.trim());
+             userOnPage.style.display = "block";
+             pager.setPageUser(PageController.user);
+             PageController.rememberUser();
+             PageController.createLoadBut();
+             PageController.exit_but_handle.style.display = "block";
+             PageController.add_but_handle.style.display = "block";
+             document.getElementById("load-but").style.display = "block";
+             document.getElementById("main").style.display = "block";
+             document.getElementById("add-but").addEventListener('click', PageController.makePost);
+             Sender.getPosts(-1,-1).then(res => {
+                 if (PageController.isOnStorage()) {
+                     console.log("OK");
+                         let posts;
+                         if(res == ""){posts = null;}
+                         else {
+                             posts = JSON.parse(res);
+                             for(let i = 0 ; i < posts.length;i++)
+                             {
+                                 posts[i].createdAt = new Date(posts[i].createdAt);
+                             }
+
+                         }
+                         PageController.usersPosts = new PostCollection(posts);
+                         pager.setPosts(posts);
+                 } else {
+                     pager.setPosts(PageController.usersPosts);
+                 }
+                 pager.savePosts(PageController.user);
+                 PageController.createContFunc();
+             });
      }
-     else{
-         alert("Wrong data! Try again!");
-     }
+        else {alert("Wrong data! Try again!");}
    }
    static createLoadBut()
    {
@@ -156,31 +165,12 @@ class PageController
        });
    }
 
-   /*static rememberPosts()
-   {
-      let posts = pager.getALLPosts();
-      let strPosts = "[";
-      posts.forEach(element => {
-         strPosts += JSON.stringify(element) + ',';
-      });
-      strPosts += "]";
-      strPosts = strPosts.replace(",]","]");
-      localStorage.setItem(PageController.user + "posts",strPosts);
-   }*/
    static isOnStorage()
    {
       if(localStorage.getItem(PageController.user + "posts") !== null){return true;}
       return false;
    }
-   /*static getPostsFromStorage()
-   {
-      let posts = localStorage.getItem(PageController.user + "posts");
-      return JSON.parse(posts,function(key,value)
-      {
-         if(key == 'createdAt'){return new Date(value);}
-         return value;
-      });
-   }*/
+
    static closeMainPage()
    {
       PageController.add_but_handle.style.display = "none";
@@ -193,45 +183,45 @@ class PageController
    {
       PageController.cont_func = document.getElementById("main").addEventListener('click',PageController.postEvent);
    }
-   static postEvent(event)
+   static async postEvent(event)
    {
       event.preventDefault();
       let but = event.target;
       if(but.name == 'like')
       {
-         PageController.likeControl(but);
+        await PageController.likeControl(but);
       }
       if(but.name == 'delete')
       {
-         PageController.deletePost(but.id);
+        await PageController.deletePost(but.id);
       }
       if(but.name == "setting")
       { console.log("Ok");
         PageController.createSettings(but.id);
       }
    }
-   static deletePost(id)
-   {
+   static async deletePost(id)
+   {  await Sender.delPost(id);
       PageController.usersPosts.remove(id);
       pager.removePost(id);
       pager.savePosts(PageController.user);
    }
-   static likeControl(likeBut)
+   static async likeControl(likeBut)
    {
-      if(likeBut.innerHTML == "? Like")
+      if(likeBut.innerHTML == "❤ Like")
       {
           likeBut.style.background = "red";
           likeBut.style.color = "white";
-          likeBut.innerHTML = "? Liked";
-          pager.pushLiker(likeBut.id,PageController.user);
+          likeBut.innerHTML = "❤ Liked";
+          await Sender.setLike(likeBut.id);
       }
       else{
         likeBut.style.background = "white";
         likeBut.style.color = "red";
-        likeBut.innerHTML = "? Like";
-        pager.deleteLiker(likeBut.id, PageController.user);
+        likeBut.innerHTML = "❤ Like";
+        await  Sender.setLike(likeBut.id);
       }
-      pager.savePosts(PageController.user);
+     // pager.savePosts(PageController.user);
    }
 
    static createSettings(id)
@@ -243,7 +233,7 @@ class PageController
       PageController.getClearPage();
      PageController.createAllListeners();
       document.getElementById("createpost").style.display = "block";
-      PageController.deleteSaveListener(document.getElementById("savepost"));
+       document.getElementById("savepost").addEventListener('click',PageController.editPost);
       PageController.createTagInput(id);
       PageController.createDescInput();
       PageController.createLink();
@@ -273,7 +263,6 @@ class PageController
    document.getElementById("link").addEventListener('keyup',PageController.setLink);
    document.getElementById("oldtags").addEventListener('keyup',PageController.setTags);
    document.getElementById("back").addEventListener('click',PageController.closeCreatePost);
-   document.getElementById("savepost").addEventListener('click',PageController.editPost);
 }
 static setDesc(event)
 {  
@@ -312,6 +301,7 @@ static setDesc(event)
     document.getElementById("searchertools").style.display = "block";
     document.getElementById("main").addEventListener('click',PageController.postEvent);
     PageController.closeAllListeners();
+     document.getElementById("savepost").removeEventListener('click',PageController.editPost);
     PageController.createMainPage(event);
  }
  static closeAllListeners()
@@ -320,7 +310,6 @@ static setDesc(event)
    document.getElementById("link").removeEventListener('keyup',PageController.setLink);
    document.getElementById("oldtags").removeEventListener('keyup',PageController.setTags);
    document.getElementById("back").removeEventListener('click',PageController.closeCreatePost);
-   document.getElementById("savepost").removeEventListener('click',PageController.editPost);
  }
 
  static makePost(event)
@@ -333,17 +322,17 @@ static setDesc(event)
      document.getElementById("add-but").style.display = "none";
      document.getElementById("createpost").style.display = "block";
     let saveBut =  document.getElementById("savepost");
-    PageController.redirectSaveBut(saveBut);
     PageController.createAllListeners();
+     saveBut.addEventListener("click",PageController.pushPost)
     PageController.clearInputForAddPost();
      PageController.initOldPost();
  } 
 
- static redirectSaveBut(but)
+ /*static redirectSaveBut(but)
  {
     but.removeEventListener('click',PageController.editPost);
     but.addEventListener('click',PageController.pushPost);
- }
+ }*/
 
  static deleteSaveListener(but)
  {
@@ -357,12 +346,13 @@ static setDesc(event)
     document.getElementById("oldtags").value = "";
  }
 
- static pushPost(event)
+ static async  pushPost(event)
  {
      event.preventDefault();
      pager.addPost(PageController.oldPost);
-     pager.savePosts(PageController.user);
-     PageController.closeMakePostPage(event);
+    await Sender.addPost(PageController.oldPost);
+         pager.savePosts(PageController.user);
+         PageController.closeMakePostPage(event);
  }
 
  static closeMakePostPage(event)
@@ -384,10 +374,11 @@ static initOldPost()
       likes: [],
    };
 }
- static editPost(event)
+ static async editPost(event)
  {
     event.preventDefault();
     pager.editPost(PageController.oldPost);
+    await Sender.addPost(PageController.oldPost);
     pager.savePosts(PageController.user);
     PageController.closeCreatePost(event);
  }
