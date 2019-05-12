@@ -4,17 +4,23 @@ import project.logic.com.PhotoPost;
 import project.logic.com.PostCollection;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
+@WebServlet
+@MultipartConfig
 public class PostServlet extends HttpServlet {
-    private static PostCollection storage = new PostCollection();
+    public static PostCollection storage = new PostCollection();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
      String id = req.getParameter("id").trim();
@@ -46,7 +52,6 @@ public class PostServlet extends HttpServlet {
        {
            storage.remove(id);
        }
-        resp.getOutputStream().println(id);
     }
 
    static public PostCollection getStorage() {
