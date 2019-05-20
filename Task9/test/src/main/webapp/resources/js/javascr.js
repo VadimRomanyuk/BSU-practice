@@ -1090,7 +1090,7 @@
    { if(!!!id || !!!user){console.log("no user or id");return false;}
      let post = this.get(id);
      if(!post){console.log("no post");return false;}
-     let index = post.likes.findIndex(elem => elem == user);
+     let index = post.likes.findIndex(elem => elem == user.toLowerCase());
      if(index > -1) { console.log("ok");return true;}
      console.log("bad user");
      return false;
