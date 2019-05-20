@@ -14,6 +14,6 @@ public class LikeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
-        PostServlet.storage.setLike(id,LogInServlet.user.getNAME());
+        PostServlet.storage.setLiker(id,LogInServlet.user.getNAME());
     }
 }
