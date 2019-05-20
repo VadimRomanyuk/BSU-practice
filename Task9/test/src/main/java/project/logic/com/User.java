@@ -9,6 +9,12 @@ public class User {
         this.PASS = pass;
     }
 
+    public User(User user)
+    {
+        this.NAME = user.getNAME();
+        this.PASS = user.getPASS();
+    }
+
     public String getNAME() {
         return NAME;
     }
