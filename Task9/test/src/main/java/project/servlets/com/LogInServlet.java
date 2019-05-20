@@ -23,7 +23,7 @@ public class LogInServlet extends HttpServlet {
       String login = req.getParameter("login").trim();
       String pass = req.getParameter("pass").trim();
       user = new User(login,pass);
-        System.out.println(user.getNAME() + " " + user.getPASS());
+        PostServlet.storage.addUser(user);
     }
 
     @Override
