@@ -80,5 +80,5 @@ list.appendChild(li);
            static clear()
             {
                 document.getElementById("lenta").innerHTML = ' ';
-            }     
+            }      
 }
