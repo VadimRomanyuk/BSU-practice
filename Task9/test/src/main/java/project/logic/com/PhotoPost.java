@@ -98,6 +98,6 @@ public class PhotoPost {
         elem.put("photolink",photoLink);
         elem.put("description",description);
         elem.put("hashtags",hashTags.toString());
-        return elem.toString();
+        return elem.toString(); 
     }
 }
