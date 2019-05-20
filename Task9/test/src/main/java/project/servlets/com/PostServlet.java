@@ -2,6 +2,7 @@ package project.servlets.com;
 
 import project.logic.com.PhotoPost;
 import project.logic.com.PostCollection;
+import project.logic.com.PostService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -20,7 +21,7 @@ import java.util.*;
 @WebServlet
 @MultipartConfig
 public class PostServlet extends HttpServlet {
-    public static PostCollection storage = new PostCollection();
+    public static PostService storage = new PostService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
      String id = req.getParameter("id").trim();
@@ -42,7 +43,7 @@ public class PostServlet extends HttpServlet {
        ArrayList<String> tagsForPost = new ArrayList<>();
        Collections.addAll(tagsForPost,tags);
        PhotoPost elem = new PhotoPost(id,description,author,photolink,new Date(),new ArrayList<String>(),tagsForPost);
-       storage.add(elem);
+       storage.addPost(elem);
     }
 
     @Override
@@ -50,11 +51,8 @@ public class PostServlet extends HttpServlet {
        String id =  req.getParameter("id").trim();
        if(id != null)
        {
-           storage.remove(id);
+           storage.removePost(id);
        }
     }
 
-   static public PostCollection getStorage() {
-        return new PostCollection(storage.getArray());
-    }
 }
