@@ -1,6 +1,9 @@
 package project.logic.com;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import netscape.javascript.JSObject;
+import project.database.DataBaseHandler;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -124,6 +127,7 @@ public boolean edit(PhotoPost post)
                 System.out.println("update tags");
             }
             iter.set(oldPost);
+            new DataBaseHandler().editPost(oldPost);
             return true;
         }
     }
@@ -338,7 +342,7 @@ public ArrayList<PhotoPost> addAll(ArrayList<PhotoPost> posts)
 
  public static String toJsonString(List<PhotoPost> info)
  {   if(info.size()>0) {
-     Gson gson = new Gson();
+     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
      StringBuilder sb = new StringBuilder();
      sb.append("[");
      for (int i = 0; i < info.size(); i++) {
