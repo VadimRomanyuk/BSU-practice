@@ -40,7 +40,7 @@ class PageController
        PageController.confirm_but_handle = document.getElementById("confirm-but");
        PageController.confirm_but_handle.addEventListener('click',PageController.createMainPage);
    }
-   static  createMainPage(event)
+   static  async createMainPage(event)
    {
      event.preventDefault();
      if(!!PageController.login_input.value.trim() && !!PageController.pass_input.value.trim()) {
@@ -49,7 +49,7 @@ class PageController
          document.getElementById("searchertools").style.display = "block";
          PageController.user = PageController.login_input.value.trim();
          let userOnPage = document.getElementById("username");
-         Sender.sendUserandPass(PageController.user, document.getElementById("pass").value.trim());
+         await Sender.sendUserandPass(PageController.user, document.getElementById("pass").value.trim());
              userOnPage.style.display = "block";
              pager.setPageUser(PageController.user);
              PageController.rememberUser();
@@ -59,27 +59,11 @@ class PageController
              document.getElementById("load-but").style.display = "block";
              document.getElementById("main").style.display = "block";
              document.getElementById("add-but").addEventListener('click', PageController.makePost);
-             Sender.getPosts(-1,-1).then(res => {
-                 if (PageController.isOnStorage()) {
-                     console.log("OK");
-                         let posts;
-                         if(res == ""){posts = null;}
-                         else {
-                             posts = JSON.parse(res);
-                             for(let i = 0 ; i < posts.length;i++)
-                             {
-                                 posts[i].createdAt = new Date(posts[i].createdAt);
-                             }
-
-                         }
-                         PageController.usersPosts = new PostCollection(posts);
-                         pager.setPosts(posts);
-                 } else {
-                     pager.setPosts(PageController.usersPosts);
-                 }
+               let posts = await PostSender.getPosts(-1,-1);
+                   PageController.usersPosts = new PostCollection(posts);
+               pager.setPosts(posts);
                  pager.savePosts(PageController.user);
                  PageController.createContFunc();
-             });
      }
         else {alert("Wrong data! Try again!");}
    }
@@ -201,7 +185,7 @@ class PageController
       }
    }
    static async deletePost(id)
-   {  await Sender.delPost(id);
+   {  await PostSender.delPost(id);
       PageController.usersPosts.remove(id);
       pager.removePost(id);
       pager.savePosts(PageController.user);
@@ -213,13 +197,13 @@ class PageController
           likeBut.style.background = "red";
           likeBut.style.color = "white";
           likeBut.innerHTML = "❤ Liked";
-          await Sender.setLike(likeBut.id);
+          await PostSender.setLike(likeBut.id);
       }
       else{
         likeBut.style.background = "white";
         likeBut.style.color = "red";
         likeBut.innerHTML = "❤ Like";
-        await  Sender.setLike(likeBut.id);
+        await  PostSender.setLike(likeBut.id);
       }
      // pager.savePosts(PageController.user);
    }
@@ -350,7 +334,7 @@ static setDesc(event)
  {
      event.preventDefault();
      pager.addPost(PageController.oldPost);
-    await Sender.addPost(PageController.oldPost);
+    await PostSender.addPost(PageController.oldPost);
          pager.savePosts(PageController.user);
          PageController.closeMakePostPage(event);
  }
@@ -378,7 +362,7 @@ static initOldPost()
  {
     event.preventDefault();
     pager.editPost(PageController.oldPost);
-    await Sender.addPost(PageController.oldPost);
+    await PostSender.addPost(PageController.oldPost);
     pager.savePosts(PageController.user);
     PageController.closeCreatePost(event);
  }
