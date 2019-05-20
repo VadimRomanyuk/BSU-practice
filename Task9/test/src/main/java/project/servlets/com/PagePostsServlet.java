@@ -22,12 +22,13 @@ public class PagePostsServlet extends HttpServlet {
             skip = Integer.parseInt(req.getParameter("skip").trim());
             if(skip == -1)
             {
-                posts = PostServlet.getStorage().getArray();
-                resp.getOutputStream().print(PostCollection.toJsonString(posts));
+                posts = PostServlet.storage.getCollection().getArray();
+                resp.getWriter().write(PostCollection.toJsonString(posts));
                 return ;
             }
         } catch (Exception e)
         {
+            e.printStackTrace();
             skip = 0;
         }
         try {
@@ -67,10 +68,10 @@ public class PagePostsServlet extends HttpServlet {
 
         }
         if(filterConfig.size() == 0) {
-             posts = PostServlet.getStorage().getPage(skip, top, null);
+             posts = PostServlet.storage.getCollection().getPage(skip, top, null);
         }
         else{
-            posts = PostServlet.getStorage().getPage(skip,top,filterConfig);
+            posts = PostServlet.storage.getCollection().getPage(skip,top,filterConfig);
         }
          resp.getOutputStream().print(PostCollection.toJsonString(posts));
     }
